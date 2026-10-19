@@ -1,3 +1,13 @@
+---
+title: Attendance Bloom Student System
+emoji: 🎓
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # Student Attendance Management System
 
 Production-quality full-stack web application built for the **Thondaman Vocational Training Centre (TVTC)**. It features real-time QR code camera scanning, student profile administration, role-based authentication, and automated attendance logging.
