@@ -4,41 +4,41 @@
   --font-family: 'Nunito', system-ui, -apple-system, sans-serif;
   --font-heading: 'Quicksand', system-ui, sans-serif;
 
-  /* "Blush Garden" Palette */
-  --bg-main: #FFF5F7;          /* Soft blush white */
+  /* "Aesthetic Girlish Bloom" Dreamy Pastel Palette */
+  --bg-main: #FFF5F8;          /* Sweet strawberry cream */
   --bg-surface: #FFFFFF;       /* Pure white surface */
   --bg-card: #FFFFFF;          /* Light card background */
-  --bg-card-hover: #FFF0F4;    /* Light rose hover state */
+  --bg-card-hover: #FFF0F6;    /* Soft cherry blossom hover */
   
-  --primary: #F8A5C2;         /* Rose pink */
-  --primary-hover: #F48FB1;   /* Deeper rose pink */
-  --accent: #C56D8C;          /* Deep mauve heading/accent */
-  --accent-hover: #B25A79;    /* Deeper mauve hover */
+  --primary: #FF80AB;         /* Vibrant candy rose pink */
+  --primary-hover: #FF4081;   /* Rich blossom pink */
+  --accent: #E91E63;          /* Rose magenta accent */
+  --accent-hover: #C2185B;    /* Deep rose hover */
   
-  --navy-dark: #6B4052;       /* Soft plum dark */
-  --navy-accent: #FDE2E4;     /* Blush container background */
+  --navy-dark: #831843;       /* Deep raspberry dark */
+  --navy-accent: #FCE7F3;     /* Soft cotton candy container */
 
-  --text-main: #4A3540;       /* Soft plum-charcoal (high contrast, WCAG AAA) */
-  --text-muted: #7E616F;      /* Soft muted plum */
-  --text-dim: #A08391;        /* Light muted plum */
-  --border-color: #F5D5DF;    /* Soft rose border */
+  --text-main: #4A1525;       /* Deep rose-charcoal */
+  --text-muted: #9D4C6C;      /* Soft raspberry muted */
+  --text-dim: #BE6E8D;        /* Light strawberry muted */
+  --border-color: #FBCFE8;    /* Pastel pink border */
   
-  --success: #3A9468;         /* Sage mint green */
-  --success-bg: #E8F5E9;      /* Light mint background */
-  --error: #E76F51;           /* Warm coral error */
-  --error-bg: #FDF0ED;        /* Warm coral light background */
-  --warning: #D97706;         /* Soft amber warning */
-  --warning-bg: #FEF3C7;      /* Soft amber light background */
+  --success: #10B981;         /* Fresh mint sage */
+  --success-bg: #ECFDF5;      /* Soft mint pastel */
+  --error: #F43F5E;           /* Vibrant strawberry red */
+  --error-bg: #FFF1F2;        /* Soft blush red */
+  --warning: #F59E0B;         /* Honey peach warning */
+  --warning-bg: #FFFBEB;      /* Soft peach pastel */
 
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
   --radius-full: 9999px;
 
-  /* Tinted Pink-Toned Soft Shadows */
-  --shadow-sm: 0 4px 14px rgba(229, 152, 175, 0.15);
-  --shadow-md: 0 8px 24px rgba(229, 152, 175, 0.22);
-  --shadow-lg: 0 14px 40px rgba(229, 152, 175, 0.30);
+  /* Dreamy Aesthetic Pink-Toned Ambient Glows */
+  --shadow-sm: 0 4px 16px rgba(244, 114, 182, 0.14);
+  --shadow-md: 0 8px 26px rgba(244, 114, 182, 0.20);
+  --shadow-lg: 0 16px 44px rgba(244, 114, 182, 0.28);
 
   --sidebar-width: 270px;
 }
@@ -350,27 +350,29 @@ h1, h2, h3, h4, h5, h6, .heading-font {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--primary-hover) 100%);
+  background: linear-gradient(135deg, #FF6B95 0%, #FF85A2 50%, #FFA0BA 100%);
   color: white;
-  box-shadow: 0 4px 14px rgba(197, 109, 140, 0.3);
+  box-shadow: 0 4px 18px rgba(255, 107, 149, 0.4);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, var(--accent-hover) 0%, var(--accent) 100%);
-  box-shadow: 0 6px 18px rgba(197, 109, 140, 0.45);
-  transform: translateY(-1px);
+  background: linear-gradient(135deg, #F43F5E 0%, #FB7185 50%, #FDA4AF 100%);
+  box-shadow: 0 8px 24px rgba(244, 63, 94, 0.45);
+  transform: translateY(-2px);
 }
 
 .btn-secondary {
-  background-color: var(--bg-main);
-  color: var(--text-main);
-  border: 1px solid var(--border-color);
+  background-color: #FFF0F6;
+  color: var(--accent);
+  border: 1.5px solid var(--border-color);
+  font-weight: 700;
 }
 
 .btn-secondary:hover {
-  background-color: var(--bg-card-hover);
+  background-color: #FFE4EC;
   border-color: var(--primary);
-  color: var(--accent);
+  color: var(--accent-hover);
+  transform: translateY(-1px);
 }
 
 /* Input Fields */
