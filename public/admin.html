@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Site | Attendance Bloom</title>
+  <link rel="icon" type="image/png" href="/assets/images/tvtc.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/assets/images/tvtc.png" alt="Logo" class="sidebar-logo">
+        <div class="sidebar-title">
+          <h2><i data-lucide="flower-2" style="width: 18px; height: 18px; color: var(--accent);"></i> Bloom</h2>
+          <p class="brand-short-name">LSA</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="cards.html" class="nav-item">
+          <i data-lucide="id-card"></i>
+          <span>Student Profiles</span>
+        </a>
+        <a href="attendance.html" class="nav-item">
+          <i data-lucide="qr-code"></i>
+          <span>Attendance Scanner</span>
+        </a>
+        <a href="summary.html" class="nav-item">
+          <i data-lucide="bar-chart-3"></i>
+          <span>Reports & Logs</span>
+        </a>
+        <a href="admin.html" class="nav-item active">
+          <i data-lucide="shield-check"></i>
+          <span>Admin Site</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="btn-logout" onclick="logout()">
+          <i data-lucide="log-out"></i>
+          <span>Sign Out</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header class="top-navbar">
+        <button class="mobile-toggle" id="mobile-toggle">
+          <i data-lucide="menu"></i>
+        </button>
+        <div class="brand-header-title">
+          <i data-lucide="flower-2"></i>
+          <span>Attendance Bloom &bull; System Administration</span>
+        </div>
+        <div class="user-badge">
+          <div class="user-avatar" id="nav-avatar">A</div>
+          <div class="user-info">
+            <h4 id="nav-username">Admin User</h4>
+            <p id="nav-role">Administrator</p>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Admin Management & Settings</h1>
+            <p class="page-subtitle">Administrator controls, institute branding settings, and security configuration.</p>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
+          <!-- User Profile Card -->
+          <div class="card-box" style="text-align: center;">
+            <div style="width: 84px; height: 84px; border-radius: 50%; background: var(--navy-accent); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 800; font-family: var(--font-heading); margin: 0 auto 16px; border: 3px solid var(--primary); box-shadow: var(--shadow-sm);">
+              A
+            </div>
+            <h2 style="font-size: 1.3rem; font-weight: 800; color: var(--accent);">Admin User</h2>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; font-weight: 600;">System Administrator</p>
+
+            <div style="background: var(--bg-main); padding: 18px; border-radius: var(--radius-md); text-align: left; margin-bottom: 24px; border: 1px solid var(--border-color);">
+              <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 8px;"><strong>Account Username:</strong> <span style="color: var(--text-main);">admin</span></p>
+              <p style="font-size: 0.88rem; color: var(--text-muted);"><strong>Role Privileges:</strong> <span class="badge badge-check_in">Administrator</span></p>
+            </div>
+
+            <a href="change-password.html" class="btn btn-primary" style="width: 100%;">
+              <i data-lucide="key-round"></i>
+              <span>Change Account Password</span>
+            </a>
+          </div>
+
+          <!-- Institute Branding Settings Card -->
+          <div class="card-box">
+            <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--accent); margin-bottom: 16px;">Institute & Branding Settings</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Configure institutional identity across all headers, cards, and reports dynamically.</p>
+            
+            <form id="institute-settings-form">
+              <div class="form-group">
+                <label for="setting-institute-name">Institute Full Name</label>
+                <input type="text" id="setting-institute-name" class="form-control" placeholder="e.g. Lotus Skills Academy" required>
+              </div>
+
+              <div class="form-group">
+                <label for="setting-short-name">Short Name / Abbreviation</label>
+                <input type="text" id="setting-short-name" class="form-control" placeholder="e.g. LSA" required>
+              </div>
+
+              <div class="form-group">
+                <label for="setting-tagline">Institute Tagline / Subtitle</label>
+                <input type="text" id="setting-tagline" class="form-control" placeholder="e.g. Empowering Future Skills">
+              </div>
+
+              <div class="form-group">
+                <label for="setting-logo-url">Logo Image URL</label>
+                <input type="text" id="setting-logo-url" class="form-control" placeholder="e.g. /assets/images/tvtc.png">
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+                <i data-lucide="save"></i>
+                <span>Save Institute Settings</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- System Status Card -->
+          <div class="card-box" style="grid-column: 1 / -1;">
+            <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--accent); margin-bottom: 16px;">System Configuration Status</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+              <div style="padding: 16px; background: var(--bg-main); border-radius: var(--radius-md); border-left: 4px solid var(--success); border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+                <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--accent);">Authentication Backend</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Node.js / Express API with bcrypt password hashing and HTTP-Only JWT cookies.</p>
+              </div>
+
+              <div style="padding: 16px; background: var(--bg-main); border-radius: var(--radius-md); border-left: 4px solid var(--accent); border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+                <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--accent);">Database Engine</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">SQLite local storage file (`server/db/database.sqlite`).</p>
+              </div>
+
+              <div style="padding: 16px; background: var(--bg-main); border-radius: var(--radius-md); border-left: 4px solid var(--warning); border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+                <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--accent);">Rate Limiting & Security</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Login brute-force limiter enabled (max 5 requests per 15-minute window in production).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/admin.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

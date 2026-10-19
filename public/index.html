@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Attendance Bloom</title>
+  <link rel="icon" type="image/png" href="/assets/images/tvtc.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/assets/images/tvtc.png" alt="Logo" class="sidebar-logo">
+        <div class="sidebar-title">
+          <h2><i data-lucide="flower-2" style="width: 18px; height: 18px; color: var(--accent);"></i> Bloom</h2>
+          <p data-setting="institute_short_name" class="brand-short-name">LSA</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item active">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="cards.html" class="nav-item">
+          <i data-lucide="id-card"></i>
+          <span>Student Profiles</span>
+        </a>
+        <a href="attendance.html" class="nav-item">
+          <i data-lucide="qr-code"></i>
+          <span>Attendance Scanner</span>
+        </a>
+        <a href="summary.html" class="nav-item">
+          <i data-lucide="bar-chart-3"></i>
+          <span>Reports & Logs</span>
+        </a>
+        <a href="admin.html" class="nav-item">
+          <i data-lucide="shield-check"></i>
+          <span>Admin Site</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="btn-logout" onclick="logout()">
+          <i data-lucide="log-out"></i>
+          <span>Sign Out</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Navbar -->
+      <header class="top-navbar">
+        <button class="mobile-toggle" id="mobile-toggle">
+          <i data-lucide="menu"></i>
+        </button>
+
+        <div class="brand-header-title">
+          <i data-lucide="flower-2"></i>
+          <span>Attendance Bloom &bull; <span data-setting="institute_name" class="brand-institute-name">Lotus Skills Academy</span></span>
+        </div>
+
+        <div class="user-badge">
+          <div class="user-avatar" id="nav-avatar">A</div>
+          <div class="user-info">
+            <h4 id="nav-username">Admin User</h4>
+            <p id="nav-role">Administrator</p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Student Attendance Portal</h1>
+            <p class="page-subtitle">Streamline enrollment, QR identification, and real-time attendance tracking with Attendance Bloom.</p>
+          </div>
+          <div>
+            <a href="attendance.html" class="btn btn-primary">
+              <i data-lucide="qr-code"></i>
+              <span>Launch Scanner</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Summary Cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-bottom: 32px;">
+          <div class="card-box">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <p style="font-size: 0.85rem; color: var(--text-muted); font-weight: 700;">System Feature</p>
+                <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--accent); margin-top: 4px;">Quick Scanning</h3>
+              </div>
+              <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--navy-accent); color: var(--accent); display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="scan-line" style="width: 24px; height: 24px;"></i>
+              </div>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 12px;">Instant camera QR scanning and check-in validation for every student card.</p>
+          </div>
+
+          <div class="card-box">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <p style="font-size: 0.85rem; color: var(--text-muted); font-weight: 700;">Live Updates</p>
+                <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--accent); margin-top: 4px;">Real-Time Tracking</h3>
+              </div>
+              <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--success-bg); color: var(--success); display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="clock" style="width: 24px; height: 24px;"></i>
+              </div>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 12px;">Automatic timestamp recording stored securely in SQLite database.</p>
+          </div>
+
+          <div class="card-box">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <p style="font-size: 0.85rem; color: var(--text-muted); font-weight: 700;">Export & Audit</p>
+                <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--accent); margin-top: 4px;">Detailed Reports</h3>
+              </div>
+              <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--warning-bg); color: var(--warning); display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="file-spreadsheet" style="width: 24px; height: 24px;"></i>
+              </div>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 12px;">Comprehensive exportable CSV data logs for attendance analysis.</p>
+          </div>
+        </div>
+
+        <!-- Campus Feature Banner -->
+        <div class="card-box" style="display: flex; align-items: center; gap: 32px; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 280px;">
+            <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--accent); margin-bottom: 8px;">About <span data-setting="institute_name" class="brand-institute-name">Lotus Skills Academy</span></h2>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6;">
+              <span data-setting="institute_name" class="brand-institute-name">Lotus Skills Academy</span> provides technical and vocational education. Attendance Bloom integrates student profile management, dynamic QR code card generation, and live attendance logging to support institutional discipline and reporting.
+            </p>
+            <div style="margin-top: 22px; display: flex; gap: 12px;">
+              <a href="cards.html" class="btn btn-primary">View Student Profiles</a>
+              <a href="summary.html" class="btn btn-secondary">View Attendance Logs</a>
+            </div>
+          </div>
+          <div style="width: 280px; text-align: center;">
+            <img src="/assets/students/front.jpg" alt="Academy Front" style="width: 100%; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);" onerror="this.src='/assets/images/tvtc.png'">
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Student Card | Attendance Bloom</title>
+  <link rel="icon" type="image/png" href="/assets/images/tvtc.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/assets/images/tvtc.png" alt="Logo" class="sidebar-logo">
+        <div class="sidebar-title">
+          <h2><i data-lucide="flower-2" style="width: 18px; height: 18px; color: var(--accent);"></i> Bloom</h2>
+          <p data-setting="institute_short_name" class="brand-short-name">LSA</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="cards.html" class="nav-item active">
+          <i data-lucide="id-card"></i>
+          <span>Student Profiles</span>
+        </a>
+        <a href="attendance.html" class="nav-item">
+          <i data-lucide="qr-code"></i>
+          <span>Attendance Scanner</span>
+        </a>
+        <a href="summary.html" class="nav-item">
+          <i data-lucide="bar-chart-3"></i>
+          <span>Reports & Logs</span>
+        </a>
+        <a href="admin.html" class="nav-item">
+          <i data-lucide="shield-check"></i>
+          <span>Admin Site</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="btn-logout" onclick="logout()">
+          <i data-lucide="log-out"></i>
+          <span>Sign Out</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header class="top-navbar">
+        <button class="mobile-toggle" id="mobile-toggle">
+          <i data-lucide="menu"></i>
+        </button>
+        <div class="brand-header-title">
+          <i data-lucide="flower-2"></i>
+          <span>Attendance Bloom &bull; Student QR Card</span>
+        </div>
+        <div class="user-badge">
+          <div class="user-avatar" id="nav-avatar">A</div>
+          <div class="user-info">
+            <h4 id="nav-username">User</h4>
+            <p id="nav-role">Role</p>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title" id="page-title">Generate New Student ID Card</h1>
+            <p class="page-subtitle" id="page-subtitle">Enter student details to generate a unique QR code and persist profile in database.</p>
+          </div>
+          <div>
+            <a href="cards.html" class="btn btn-secondary">
+              <i data-lucide="arrow-left"></i>
+              <span>Back to Directory</span>
+            </a>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
+          <!-- Form Section -->
+          <div class="card-box">
+            <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--accent); margin-bottom: 20px;" id="form-heading">Student Information</h2>
+            
+            <form id="create-card-form">
+              <div class="form-group">
+                <label for="studentId">Student ID Number</label>
+                <input type="text" id="studentId" class="form-control" placeholder="e.g. STU004" required>
+              </div>
+
+              <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" class="form-control" placeholder="Enter student full name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="department">Department / Course</label>
+                <input type="text" id="department" class="form-control" placeholder="e.g. Information Technology" required>
+              </div>
+
+              <div class="form-group">
+                <label for="photoFile">Student Photo (Optional)</label>
+                <input type="file" id="photoFile" class="form-control" accept="image/png, image/jpeg, image/jpg">
+                <div id="photo-preview-box" style="margin-top: 8px; display: none; align-items: center; gap: 12px;">
+                  <img id="photo-preview" src="" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary);" />
+                  <span style="font-size: 0.82rem; color: var(--text-muted); font-weight: 600;">Current / Selected Photo</span>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 12px;" id="btn-submit-card">
+                <i data-lucide="qr-code"></i>
+                <span id="btn-submit-text">Generate & Save QR Card</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Preview Section -->
+          <div class="card-box" style="text-align: center;">
+            <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--accent); margin-bottom: 16px;">Generated Card Preview</h2>
+            
+            <div id="qrPreviewContainer" style="display: none; padding: 24px; background: var(--bg-main); border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+              <img src="/assets/images/tvtc.png" alt="Logo" class="login-logo" style="width: 50px; height: 50px; border-radius: 50%; margin-bottom: 12px; background: white; padding: 2px; border: 2px solid var(--primary);">
+              <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--accent);" data-setting="institute_name" class="brand-institute-name">Lotus Skills Academy</h3>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px; font-weight: 600;">Attendance Bloom Identification</p>
+              
+              <div style="background: white; padding: 16px; border-radius: var(--radius-md); display: inline-block; box-shadow: var(--shadow-sm);">
+                <img id="qrCodePreview" src="" alt="QR Code Preview" style="width: 180px; height: 180px; display: block;" />
+              </div>
+            </div>
+
+            <div id="qrPlaceholder" style="padding: 48px; border: 2px dashed var(--border-color); border-radius: var(--radius-lg); color: var(--text-dim); font-size: 0.92rem; font-weight: 600;">
+              Fill out form and submit to view generated QR card preview.
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/cards.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

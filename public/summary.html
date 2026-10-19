@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance Reports | Attendance Bloom</title>
+  <link rel="icon" type="image/png" href="/assets/images/tvtc.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/assets/images/tvtc.png" alt="TVTC Logo" class="sidebar-logo">
+        <div class="sidebar-title">
+          <h2><i data-lucide="flower-2" style="width: 18px; height: 18px; color: var(--accent);"></i> Bloom</h2>
+          <p>Thondaman VTC</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="cards.html" class="nav-item">
+          <i data-lucide="id-card"></i>
+          <span>Student Profiles</span>
+        </a>
+        <a href="attendance.html" class="nav-item">
+          <i data-lucide="qr-code"></i>
+          <span>Attendance Scanner</span>
+        </a>
+        <a href="summary.html" class="nav-item active">
+          <i data-lucide="bar-chart-3"></i>
+          <span>Reports & Logs</span>
+        </a>
+        <a href="admin.html" class="nav-item">
+          <i data-lucide="shield-check"></i>
+          <span>Admin Site</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="btn-logout" onclick="logout()">
+          <i data-lucide="log-out"></i>
+          <span>Sign Out</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header class="top-navbar">
+        <button class="mobile-toggle" id="mobile-toggle">
+          <i data-lucide="menu"></i>
+        </button>
+        <div class="brand-header-title">
+          <i data-lucide="flower-2"></i>
+          <span>Attendance Bloom &bull; Reports & Audit Logs</span>
+        </div>
+        <div class="user-badge">
+          <div class="user-avatar" id="nav-avatar">A</div>
+          <div class="user-info">
+            <h4 id="nav-username">User</h4>
+            <p id="nav-role">Role</p>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Attendance Summary & Reports</h1>
+            <p class="page-subtitle">Real-time attendance logs, date filters, and exportable CSV audit data.</p>
+          </div>
+          <div>
+            <button id="btn-export-csv" class="btn btn-primary">
+              <i data-lucide="download"></i>
+              <span>Export CSV</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="card-box" style="margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 220px;">
+            <input type="text" id="search-logs" class="form-control" placeholder="Search student name, ID, or department...">
+          </div>
+          <div style="width: 200px;">
+            <input type="date" id="filter-date" class="form-control">
+          </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="table-responsive card-box" style="padding: 0;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Department</th>
+                <th>Action</th>
+                <th>Timestamp</th>
+                <th>Scanned By</th>
+              </tr>
+            </thead>
+            <tbody id="attendance-table-body">
+              <!-- Loaded dynamically via summary.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/summary.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance Scanner | Attendance Bloom</title>
+  <link rel="icon" type="image/png" href="/assets/images/tvtc.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/html5-qrcode"></script>
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/assets/images/tvtc.png" alt="TVTC Logo" class="sidebar-logo">
+        <div class="sidebar-title">
+          <h2><i data-lucide="flower-2" style="width: 18px; height: 18px; color: var(--accent);"></i> Bloom</h2>
+          <p>Thondaman VTC</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="cards.html" class="nav-item">
+          <i data-lucide="id-card"></i>
+          <span>Student Profiles</span>
+        </a>
+        <a href="attendance.html" class="nav-item active">
+          <i data-lucide="qr-code"></i>
+          <span>Attendance Scanner</span>
+        </a>
+        <a href="summary.html" class="nav-item">
+          <i data-lucide="bar-chart-3"></i>
+          <span>Reports & Logs</span>
+        </a>
+        <a href="admin.html" class="nav-item">
+          <i data-lucide="shield-check"></i>
+          <span>Admin Site</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="btn-logout" onclick="logout()">
+          <i data-lucide="log-out"></i>
+          <span>Sign Out</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header class="top-navbar">
+        <button class="mobile-toggle" id="mobile-toggle">
+          <i data-lucide="menu"></i>
+        </button>
+        <div class="brand-header-title">
+          <i data-lucide="flower-2"></i>
+          <span>Attendance Bloom &bull; Live Scanner Terminal</span>
+        </div>
+        <div class="user-badge">
+          <div class="user-avatar" id="nav-avatar">A</div>
+          <div class="user-info">
+            <h4 id="nav-username">User</h4>
+            <p id="nav-role">Staff</p>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Scan Attendance QR Code</h1>
+            <p class="page-subtitle">Scan student ID card QR codes or enter student ID manually to log check-in/check-out.</p>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
+          <!-- Camera Scanner Column -->
+          <div class="card-box scanner-card">
+            <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--accent); margin-bottom: 8px;">Camera Scanner</h2>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px; font-weight: 600;">Position the student QR code clearly in the frame.</p>
+            
+            <div id="camera-notice-box" style="display: none;"></div>
+
+            <button id="btn-toggle-scan" class="btn btn-primary" style="width: 100%;">
+              <i data-lucide="camera"></i>
+              <span>Start Camera Scanner</span>
+            </button>
+
+            <div id="reader" style="display: none;"></div>
+          </div>
+
+          <!-- Manual Entry Column -->
+          <div class="card-box">
+            <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--accent); margin-bottom: 16px;">Manual ID Entry</h2>
+            
+            <form id="manual-attendance-form">
+              <div class="form-group">
+                <label for="manualStudentId">Student ID</label>
+                <input type="text" id="manualStudentId" class="form-control" placeholder="e.g. STU001" required>
+              </div>
+
+              <div class="form-group">
+                <label for="attendanceType">Attendance Action</label>
+                <select id="attendanceType" class="form-control">
+                  <option value="check_in">Check In</option>
+                  <option value="check_out">Check Out</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+                <i data-lucide="check-circle-2"></i>
+                <span>Submit Attendance</span>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Last Scanned Result -->
+        <div class="card-box" style="margin-top: 32px;">
+          <h2 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 16px; color: var(--accent);">Last Scanned Student</h2>
+          <div id="last-scanned-card">
+            <div style="text-align: center; padding: 24px; color: var(--text-dim); font-size: 0.92rem; font-weight: 600;">
+              No recent scans. Scan a QR code or submit manually to see live result.
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/attendance.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
