@@ -6,3 +6,6 @@ node_modules/
 server/certs/
 .vscode/
 scratch/
+*.test.json
+public/assets/students/stu_*.png
+public/assets/students/stu_*.jpg

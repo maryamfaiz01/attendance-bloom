@@ -1,3 +1,4 @@
+process.env.DB_PATH = './server/db/database.test.json';
 const { describe, it, before, after } = require('node:test');
 const assert = require('node:assert/strict');
 const request = require('supertest');
@@ -11,7 +12,7 @@ describe('Students API Endpoints (CRUD & Edit)', () => {
 
   before(async () => {
     process.env.NODE_ENV = 'test';
-    await seedDatabase();
+    await seedDatabase(true);
 
     // Login Admin
     const adminLoginRes = await request(app)
@@ -38,6 +39,7 @@ describe('Students API Endpoints (CRUD & Edit)', () => {
   });
 
   after(async () => {
+    await seedDatabase(true);
     await closeDB();
   });
 

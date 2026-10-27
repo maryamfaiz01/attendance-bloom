@@ -96,9 +96,14 @@ async function checkSession() {
       if (roleEl) roleEl.textContent = currentUser.role;
       if (avatarEl) avatarEl.textContent = (currentUser.name || currentUser.username).charAt(0).toUpperCase();
 
+      // Show/Hide admin-only navigation links based on user role
+      document.querySelectorAll('a[href="admin.html"]').forEach(link => {
+        link.style.display = (currentUser.role === 'admin') ? 'flex' : 'none';
+      });
+
       // Enforce admin privileges for admin page
       if (window.location.pathname.endsWith('admin.html') && currentUser.role !== 'admin') {
-        showToast('Admin access required.', 'error');
+        showToast('Admin access required. Please sign in with an administrator account.', 'error');
         window.location.href = 'index.html';
         return;
       }

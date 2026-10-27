@@ -1,20 +1,25 @@
 const bcrypt = require('bcryptjs');
 const { initSchema, run, get } = require('./database');
 
-async function seedDatabase() {
+async function seedDatabase(forceResetAdmin = false) {
   await initSchema();
+
+  const defaultPassword = 'admin123';
+  const passwordHash = await bcrypt.hash(defaultPassword, 10);
 
   // Check if admin user exists
   const adminExists = await get(`SELECT id FROM users WHERE username = ?`, ['admin']);
   if (!adminExists) {
-    const defaultPassword = 'admin123';
-    const passwordHash = await bcrypt.hash(defaultPassword, 10);
-
     await run(
       `INSERT INTO users (username, password_hash, role, name, must_change_password) VALUES (?, ?, ?, ?, ?)`,
       ['admin', passwordHash, 'admin', 'Administrator', 1]
     );
     console.log('Seeded default admin user: "admin" with must_change_password = 1');
+  } else if (forceResetAdmin) {
+    await run(
+      `UPDATE users SET password_hash = ?, must_change_password = 1 WHERE id = ?`,
+      [passwordHash, adminExists.id]
+    );
   }
 
   // Seed default staff user if not exists

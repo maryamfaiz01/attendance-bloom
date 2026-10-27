@@ -1,9 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 
+const isTest = process.env.NODE_ENV === 'test' || 
+               process.execArgv.includes('--test') || 
+               process.argv.some(arg => typeof arg === 'string' && (arg.includes('.test.js') || arg === '--test'));
+const defaultDbFile = isTest ? 'database.test.json' : 'database.json';
 const dbFilePath = process.env.DB_PATH 
   ? path.resolve(process.cwd(), process.env.DB_PATH.replace('.sqlite', '.json')) 
-  : path.resolve(__dirname, 'database.json');
+  : path.resolve(__dirname, defaultDbFile);
 
 // Ensure database directory exists
 const dbDir = path.dirname(dbFilePath);
@@ -71,13 +75,19 @@ async function run(sql, params = []) {
 
   // Users update password
   if (sql.includes('UPDATE users SET password_hash')) {
-    const [password_hash, must_change_password, userId] = params;
-    const user = store.users.find(u => u.id === userId);
+    let password_hash, must_change_password, userId;
+    if (params.length === 3) {
+      [password_hash, must_change_password, userId] = params;
+    } else {
+      [password_hash, userId] = params;
+      must_change_password = sql.includes('must_change_password = 1') ? 1 : 0;
+    }
+    const user = store.users.find(u => u.id === Number(userId));
     if (user) {
       user.password_hash = password_hash;
-      user.must_change_password = must_change_password;
+      user.must_change_password = Number(must_change_password);
       saveDB();
-      return { id: userId, changes: 1 };
+      return { id: user.id, changes: 1 };
     }
   }
 
